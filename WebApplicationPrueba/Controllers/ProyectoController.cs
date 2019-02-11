@@ -88,6 +88,8 @@ namespace WebApplicationPrueba.Controllers
             }
             //PopulateAssignedUserData(proyecto);
             //ViewBag.Usuarios = new MultiSelectList(db.Usuario, "Id", "Nombre");
+
+
             return View(proyecto);
         }
 
