@@ -1,0 +1,41 @@
+﻿@model WebApplicationPrueba.Models.Usuario
+
+@{
+    ViewBag.Title = "NuevoUsuario";
+}
+
+<h2>Nuevo Ususario</h2>
+
+@using (Html.BeginForm("NuevoUsuario", "Usuario", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-md-12">
+            @Html.LabelFor(d => d.Nombre)
+            @Html.TextBoxFor(d => d.Nombre, "", new { @class = "form-control" })
+
+            @Html.ValidationMessageFor(d => d.Nombre, null, new { @class = "red" })
+
+            @Html.LabelFor(d => d.Apellidos)
+            @Html.TextBoxFor(d => d.Apellidos, "", new { @class = "form-control" })
+
+            @Html.LabelFor(d => d.Telefono)
+            @Html.TextBoxFor(d => d.Telefono, "", new { @class = "form-control" })
+            @Html.ValidationMessageFor(d => d.Telefono, null, new { @class = "danger" })
+
+
+            @Html.LabelFor(d => d.Cp)
+            @Html.TextBoxFor(d => d.Cp, "", new { @class = "form-control" })
+
+            @Html.LabelFor(d => d.CodDepartamento)
+            @Html.DropDownList("CodDepartamento", (SelectList)ViewBag.DepartmentID, "Selecciona un Departamento", htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(d => d.CodDepartamento, "Debe elegir un departamento.", new { @class = "danger" })
+        </div>
+
+        <div style="text-align:right">
+            <input value="Guardar" class="btn btn-success" type="submit" />
+        </div>
+    </div>
+    <p>
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

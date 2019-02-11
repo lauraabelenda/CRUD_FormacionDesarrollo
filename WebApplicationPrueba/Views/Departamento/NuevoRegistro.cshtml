@@ -1,0 +1,27 @@
+﻿@model WebApplicationPrueba.Models.ViewModels.DepartamentoViewModel
+@{
+    ViewBag.Title = "NuevoRegistro";
+}
+
+<h2>Nuevo Registro</h2>
+<h4>Departamento</h4>
+@using (Html.BeginForm("NuevoRegistro", "Departamento", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-md-12">
+            @Html.LabelFor(d => d.Nombre)
+            @Html.TextBoxFor(d => d.Nombre, "", new { @class = "form-control" })
+
+            @Html.ValidationMessageFor(d =>d.Nombre,null, new { @class = "danger"})
+            @Html.LabelFor(d => d.Descripcion)
+            @Html.TextBoxFor(d => d.Descripcion, "", new { @class = "form-control" })
+        </div>
+
+        <div style="text-align:right">
+            <input value="Guardar" class="btn btn-success" type="submit"/>
+        </div>
+    </div>
+    <p>
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

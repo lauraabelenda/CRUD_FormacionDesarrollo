@@ -1,0 +1,48 @@
+﻿@model List<WebApplicationPrueba.Models.ViewModels.ListDepartamentoViewModel>
+@{
+    ViewBag.Title = "Datos Departamento";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Index</title>
+</head>
+<body>
+
+    <h2>@ViewBag.Title</h2>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Descripcion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var elemento in Model)
+                    {
+                        <tr>
+                            <td>@elemento.Id</td>
+                            <td>@elemento.Nombre</td>
+                            <td>@elemento.Descripcion</td>
+                            <td>
+                                @Html.ActionLink("Eliminar", "Eliminar", new { id = elemento.Id }) |
+                                @Html.ActionLink("Editar", "EditarRegistro", new { id = elemento.Id })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+               
+            </table>
+        </div>
+    </div>
+    <div class="row" style="text-align:right;padding:5px;">
+        @* @Html.ActionLink("Nuevo", "NuevoRegistro", new { @class = "btn btn-primary" }) *@
+        <a href="/Departamento/NuevoRegistro" class="btn btn-primary" role="button">Nuevo</a>
+    </div>
+</body>
+</html>
