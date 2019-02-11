@@ -59,21 +59,8 @@ namespace WebApplicationPrueba.Controllers
         // POST: Proyecto/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nombre,Descripcion,FechaInicio,FechaFin")] Proyecto proyecto, long[] selectedUsers)
+        public ActionResult Create( Proyecto proyecto)
         {
-
-            
-            //var users = db.Usuario.ToList();
-            //List<SelectListItem> items = new List<SelectListItem>();
-            //foreach (var user in users)
-            //{
-            //    var item = new SelectListItem
-            //    {
-            //        Value = user.Id.ToString(),
-            //        Text = user.Nombre
-            //    };
-            //    items.Add(item);
-            //}
             if (ModelState.IsValid)
             {
                 db.Proyecto.Add(proyecto);
@@ -86,10 +73,6 @@ namespace WebApplicationPrueba.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            //PopulateAssignedUserData(proyecto);
-            //ViewBag.Usuarios = new MultiSelectList(db.Usuario, "Id", "Nombre");
-
-
             return View(proyecto);
         }
 
