@@ -5,9 +5,10 @@ using System.Web;
 using System.Web.Mvc;
 using WebApplicationPrueba.Models;
 using WebApplicationPrueba.Controllers;
-using WebApplicationPrueba.Models.ViewModels;
 using System.Net;
 using System.Data.Entity.Infrastructure;
+using WebApplicationPrueba.ViewModels;
+using WebApplicationPrueba.Models.ViewModels;
 
 namespace WebApplicationPrueba.Controllers
 {
@@ -88,24 +89,25 @@ namespace WebApplicationPrueba.Controllers
         }
 
         
-        public ActionResult EditarRegistro(int id)
+        public ActionResult EditarRegistro(int? id)
         {
+            Departamento dep = db.Departamento.Find(id);
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Departamento dep = db.Departamento.Find(id);
+            
             if (dep == null)
             {
                 return HttpNotFound();
             }
-            PopulateDepartmentsDropDownList(dep.Id);
+            this.PopulateDepartmentsDropDownList(dep.Id);
             return View(dep);
         }
 
-        [HttpPost]
+        [HttpPost, ActionName("EditarRegistro")]
         [ValidateAntiForgeryToken]
-        public ActionResult EditarRegistro(int? Id)
+        public ActionResult Editar(int? Id)
         {
             if (Id == null)
             {

@@ -48,17 +48,15 @@
         </div>
     </div>
     <div class="form-group">
-
         @Html.Label("Lista de Usuarios")
         <div class="col-md-10">
             @Html.ListBoxFor(model => model.SelectedUsers, new MultiSelectList(ViewBag.Usuarios, "Value", "text"))
             @Html.ValidationMessageFor(model => model.SelectedUsers)
-
         </div>
     </div>
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+            <div style="text-align:right">
+                <input value="Guardar" class="btn btn-success" type="submit" />
             </div>
         </div>
     </div>
