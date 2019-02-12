@@ -54,3 +54,10 @@
         </div>
     }
 </div>
+<div class="form-group">
+    @Html.Label("Lista de Usuarios")
+    <div class="col-md-10">
+        @Html.ListBoxFor(model => model.SelectedUsers, new MultiSelectList(ViewBag.Usuarios, "Value", "text"))
+        @Html.ValidationMessageFor(model => model.SelectedUsers)
+    </div>
+</div>

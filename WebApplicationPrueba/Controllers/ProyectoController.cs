@@ -130,17 +130,27 @@ namespace WebApplicationPrueba.Controllers
             {
                 return HttpNotFound();
             }
+            proyecto.SelectedUsers = db.UsuarioProyecto.Where(x => x.Cod_Proyecto == proyecto.Id).Select(a => a.Cod_Usuario).ToList();
+            ViewBag.Usuarios = new MultiSelectList(db.Usuario, "Id", "Nombre", proyecto.SelectedUsers);
             return View(proyecto);
         }
 
         // POST: Proyecto/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(long id)
+        public ActionResult DeleteConfirmed(Proyecto proyecto)
         {
-            Proyecto proyecto = db.Proyecto.Find(id);
-            db.Proyecto.Remove(proyecto);
-            db.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                db.Entry(proyecto).State = EntityState.Deleted;
+               
+
+               
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            //db.Proyecto.Remove(proyecto);
+            //db.SaveChanges();
             return RedirectToAction("Index");
         }
 
