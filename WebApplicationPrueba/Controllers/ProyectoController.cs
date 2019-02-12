@@ -130,9 +130,9 @@ namespace WebApplicationPrueba.Controllers
             {
                 return HttpNotFound();
             }
-            proyecto.SelectedUsers = db.UsuarioProyecto.Where(x => x.Cod_Proyecto == proyecto.Id).Select(a => a.Cod_Usuario).ToList();
-            ViewBag.Usuarios = new MultiSelectList(db.Usuario, "Id", "Nombre", proyecto.SelectedUsers);
+            PopulateUserList(proyecto.Id);
             return View(proyecto);
+            
         }
 
         // POST: Proyecto/Delete/5
@@ -143,7 +143,18 @@ namespace WebApplicationPrueba.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(proyecto).State = EntityState.Deleted;
-               
+                var existingUserIds =
+                    db.UsuarioProyecto.Where(s => s.Cod_Proyecto == proyecto.Id).Select(s => s.Cod_Usuario);
+                if (existingUserIds != null)
+                {
+                    foreach (var userId in existingUserIds)
+                    {
+                        var objUserId = (from u in db.UsuarioProyecto
+                                         where u.Cod_Usuario == userId && u.Cod_Proyecto == proyecto.Id
+                                         select u).Single();
+                        db.UsuarioProyecto.Remove(objUserId);
+                    }
+                }
 
                
                 db.SaveChanges();
