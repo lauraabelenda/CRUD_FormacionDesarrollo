@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace WebApplicationPrueba.Models.ViewModels
+namespace WebApplicationPrueba.ViewModels
 {
     public class DepartamentoViewModel
     {

@@ -41,15 +41,7 @@ namespace WebApplicationPrueba.Controllers
 
         // GET: Proyecto/Create
         public ActionResult Create(long? id)
-        {
-            //var proyecto = new Proyecto();
-            //proyecto.UsuarioProyecto = new List<UsuarioProyecto>();
-            //List<Usuario> usersQuery = (from u in db.Usuario
-            //                            select u).ToList();
-            //ViewBag.Usuarios = new MultiSelectList(usersQuery, "Id", "Nombre");
-            //return View();
-
-           
+        {          
             ViewBag.Usuarios = new MultiSelectList(db.Usuario, "Id", "Nombre");
             return View();
         }
@@ -59,7 +51,7 @@ namespace WebApplicationPrueba.Controllers
         // POST: Proyecto/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create( Proyecto proyecto)
+        public ActionResult Create(Proyecto proyecto)
         {
             if (ModelState.IsValid)
             {
@@ -88,20 +80,21 @@ namespace WebApplicationPrueba.Controllers
             proyecto.SelectedUsers = db.UsuarioProyecto.Where(x => x.Cod_Proyecto == proyecto.Id).Select(a => a.Cod_Usuario).ToList();
             ViewBag.Usuarios = new MultiSelectList(db.Usuario, "Id", "Nombre",proyecto.SelectedUsers);
 
-            
             return View(proyecto);
         }
 
         // POST: Proyecto/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditPost(Proyecto proyecto)
+        public ActionResult Edit(Proyecto proyecto)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(proyecto).State = EntityState.Modified;
+
                 var existingUserIds =
                     db.UsuarioProyecto.Where(s => s.Cod_Proyecto == proyecto.Id).Select(s => s.Cod_Usuario);
+
                 var usersToAdd = proyecto.SelectedUsers.Except(existingUserIds);
                 foreach (var userId in usersToAdd)
                 {
@@ -159,24 +152,7 @@ namespace WebApplicationPrueba.Controllers
             }
             base.Dispose(disposing);
         }
-
-        //private void PopulateAssignedUserData(Proyecto proyecto)
-        //{
-        //    var allUsers = db.Usuario;
-        //    var proyectUsers = new HashSet<long>(proyecto.UsuarioProyecto.Select(c => c.Cod_Usuario));
-        //    var viewModel = new List<AssignedUsersData>();
-        //    foreach (var user in allUsers)
-        //    {
-        //        viewModel.Add(new AssignedUsersData
-        //        {
-        //            Id = user.Id,
-        //            Nombre = user.Nombre,
-        //            Assigned = proyectUsers.Contains(user.Id)
-        //        });
-        //    }
-        //    ViewBag.Usuarios = viewModel;
-        //}
-
+        
         private void PopulateUserList(long? codP)
         {
             List<Usuario> usersQuery = (from u in db.Usuario
@@ -188,36 +164,6 @@ namespace WebApplicationPrueba.Controllers
             ViewBag.Usuarios = new MultiSelectList(usersQuery, "Id", "Nombre");
            
         }
-
-        //private void UpdateProyectUsers(string[] selectedUsers, Proyecto proyectToUpdate)
-        //{
-        //    if (selectedUsers == null)
-        //    {
-        //        proyectToUpdate.UsuarioProyecto = new List<UsuarioProyecto>();
-        //        return;
-        //    }
-        //    var selectedUsersHS = new HashSet<string>(selectedUsers);
-        //    var proyectUsers = new HashSet<long>(proyectToUpdate.Usuarios.Select(u => u.Id));
-
-        //    foreach (var user in db.UsuarioProyecto)
-        //    {
-        //        if (selectedUsersHS.Contains(user.Id.ToString()))
-        //        {
-        //            if (!proyectUsers.Contains(user.Cod_Usuario))
-        //            {
-        //                proyectToUpdate.UsuarioProyecto.Add(user);
-        //            }
-        //        }
-        //        else
-        //        {
-        //            if (proyectUsers.Contains(user.Cod_Usuario))
-        //            {
-        //                proyectToUpdate.UsuarioProyecto.Remove(user);
-        //            }
-        //        }
-        //    }
-
-            
-        //}
+        
     }
 }

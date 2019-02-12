@@ -12,7 +12,6 @@ namespace WebApplicationPrueba.ViewModels
     {
 
         public Proyecto Proyecto { get; set; }
-        public IEnumerable<SelectListItem> AllProyects { get; set; }
         public long Id { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
@@ -20,9 +19,10 @@ namespace WebApplicationPrueba.ViewModels
         public Nullable<System.DateTime> FechaFin { get; set; }
         public virtual ICollection<UsuarioProyecto> UsuarioProyecto { get; set; }
         public virtual ICollection<Usuario> Usuario { get; set; }
-       
-        //public List<long> UsuariosId { get; set; }
-        public long[] UsuariosId { get; set; }
+
+        [Display(Name = "Lista de Usuarios")]
+        public ICollection<long> SelectedUsers { get; set; }
+        
 
 
     }
