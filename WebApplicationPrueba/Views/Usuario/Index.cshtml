@@ -1,4 +1,4 @@
-﻿@model List<WebApplicationPrueba.Models.ViewModels.ListUsuarioViewModel>
+﻿@model List<WebApplicationPrueba.ViewModels.ListUsuarioViewModel>
 @{
     ViewBag.Title = "Usuarios";
 }
@@ -17,25 +17,32 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Id</th>
                         <th>Nombre</th>
                         <th>Apellidos</th>
                         <th>Teléfono</th>
                         <th>Código Postal</th>
                         <th>Código Departamento</th>
+                        <th>Proyectos</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var elemento in Model)
                     {
                         <tr>
-                            <td>@elemento.Id</td>
                             <td>@elemento.Nombre</td>
                             <td>@elemento.Apellidos</td>
                             <td>@elemento.Telefono</td>
                             <td>@elemento.Cp</td>
                             <td>@elemento.CodDepartamento</td>
+                            <td>
 
+                                @{ 
+                                    foreach (var proyecto in elemento.UsuarioProyecto)
+                                    {
+                                        @: @proyecto.Proyecto.Nombre <br/>
+                                    }
+                                }
+                            </td>
                             <td>
                                 @Html.ActionLink("Eliminar", "Eliminar", new { id = elemento.Id }) |
                                 @Html.ActionLink("Editar", "Editar", new { id = elemento.Id })

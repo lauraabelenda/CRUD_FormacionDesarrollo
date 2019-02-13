@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace WebApplicationPrueba.Models.ViewModels
+namespace WebApplicationPrueba.ViewModels
 {
     public class ListDepartamentoViewModel
     {

@@ -136,6 +136,6 @@ namespace WebApplicationPrueba.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
         }
 
-        public System.Data.Entity.DbSet<WebApplicationPrueba.Models.ViewModels.EditUsuarioViewModel> EditUsuarioViewModels { get; set; }
+        public System.Data.Entity.DbSet<WebApplicationPrueba.ViewModels.EditUsuarioViewModel> EditUsuarioViewModels { get; set; }
     }
 }

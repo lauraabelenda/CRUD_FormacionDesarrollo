@@ -8,7 +8,7 @@ using WebApplicationPrueba.Controllers;
 using System.Net;
 using System.Data.Entity.Infrastructure;
 using WebApplicationPrueba.ViewModels;
-using WebApplicationPrueba.Models.ViewModels;
+
 
 namespace WebApplicationPrueba.Controllers
 {
@@ -106,7 +106,7 @@ namespace WebApplicationPrueba.Controllers
         }
 
         [HttpPost, ActionName("EditarRegistro")]
-        [ValidateAntiForgeryToken]
+        
         public ActionResult Editar(int? Id)
         {
             if (Id == null)
