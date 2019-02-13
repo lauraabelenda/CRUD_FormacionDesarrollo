@@ -1,6 +1,6 @@
-﻿@model List<WebApplicationPrueba.Models.ViewModels.ListDepartamentoViewModel>
+﻿@model List<WebApplicationPrueba.ViewModels.ListDepartamentoViewModel>
 @{
-    ViewBag.Title = "Datos Departamento";
+    ViewBag.Title = "Departamentos";
 }
 
 <!DOCTYPE html>
@@ -17,7 +17,6 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Id</th>
                         <th>Nombre</th>
                         <th>Descripcion</th>
                     </tr>
@@ -26,7 +25,6 @@
                     @foreach (var elemento in Model)
                     {
                         <tr>
-                            <td>@elemento.Id</td>
                             <td>@elemento.Nombre</td>
                             <td>@elemento.Descripcion</td>
                             <td>

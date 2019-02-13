@@ -4,8 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebApplicationPrueba.Models;
 
-namespace WebApplicationPrueba.Models.ViewModels
+namespace WebApplicationPrueba.ViewModels
 {
     public class ListUsuarioViewModel : Controller
     {
@@ -22,7 +23,12 @@ namespace WebApplicationPrueba.Models.ViewModels
         [Display(Name = "Código departamento")]
         [Required]
         public long CodDepartamento { get; set; }
-        
+
+        public virtual ICollection<UsuarioProyecto> UsuarioProyecto { get; set; }
+        public virtual ICollection<Proyecto> Proyectos { get; set; }
+
+               
+
     }
           
 }
