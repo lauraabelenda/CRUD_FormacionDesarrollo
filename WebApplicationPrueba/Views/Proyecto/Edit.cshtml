@@ -48,7 +48,7 @@
         </div>
     </div>
     <div class="form-group">
-        @Html.Label("Lista de Usuarios")
+        @Html.Label("Lista de Usuarios", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.ListBoxFor(model => model.SelectedUsers, new MultiSelectList(ViewBag.Usuarios, "Value", "text"))
             @Html.ValidationMessageFor(model => model.SelectedUsers)

@@ -16,7 +16,7 @@ namespace WebApplicationPrueba.Controllers
     public class ProyectoController : Controller
     {
         private Formacion_DesarrolloEntities db = new Formacion_DesarrolloEntities();
-
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         // GET: Proyecto
         public ActionResult Index()
         {
@@ -57,13 +57,25 @@ namespace WebApplicationPrueba.Controllers
             {
                 db.Proyecto.Add(proyecto);
                 db.SaveChanges();
-                foreach (var user in proyecto.SelectedUsers)
+                if (proyecto.SelectedUsers != null)
                 {
-                    var obj = new UsuarioProyecto() {Cod_Usuario = user, Cod_Proyecto = proyecto.Id };
-                    db.UsuarioProyecto.Add(obj);
+                    foreach (var user in proyecto.SelectedUsers)
+                    {
+                        var obj = new UsuarioProyecto() { Cod_Usuario = user, Cod_Proyecto = proyecto.Id };
+                        db.UsuarioProyecto.Add(obj);
+                    }
+                    db.SaveChanges();
+                    //return RedirectToAction("Index");
                 }
-                db.SaveChanges();
+                else
+                {
+                    
+                    db.Proyecto.Add(proyecto);
+                    log.Info("No users selected");
+                }
+                
                 return RedirectToAction("Index");
+
             }
             return View(proyecto);
         }
@@ -112,6 +124,7 @@ namespace WebApplicationPrueba.Controllers
                 }
 
                 db.SaveChanges();
+                log.Info("Edición en proyectos");
                 return RedirectToAction("Index");
             }
             
@@ -123,6 +136,7 @@ namespace WebApplicationPrueba.Controllers
         {
             if (id == null)
             {
+               
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Proyecto proyecto = db.Proyecto.Find(id);
@@ -183,7 +197,7 @@ namespace WebApplicationPrueba.Controllers
                                         select u).ToList();
 
             ViewBag.Usuarios = new MultiSelectList(usersQuery, "Id", "Nombre");
-           
+            log.Info("usersQuery");
         }
         
     }

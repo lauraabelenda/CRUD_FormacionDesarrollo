@@ -71,9 +71,6 @@ namespace WebApplicationPrueba.Controllers
             return View(usuario);
         }
 
-     
-
-
         public ActionResult Editar(int? id)
         {
             if (id == null)
